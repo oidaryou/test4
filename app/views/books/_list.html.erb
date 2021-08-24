@@ -1,0 +1,40 @@
+<% if book.errors.any? %>
+    <%= book.errors.count %>error prohibited this obj from being saved:
+  <% book.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+<% end %>
+
+
+<table class="table">
+    <h1>User info</h1>
+ <%= attachment_image_tag user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
+
+
+ <tbody>
+ <tr>
+   <th>name</th>
+   <th><%= user.name %></th>
+   <tr>
+   <th>introduction</th>
+   <th><%= user.introduction %></th>
+   </tr>
+   <th>
+    <%= link_to  edit_user_path(user) do%>
+    <i class="fas fa-user-cog"></i>
+    <% end %>
+    </th>
+
+    </tbody>
+ </tr>
+</table>
+<h2>New book</h2>
+<!-- form_with部分 -->
+<%= form_with model: book, url:'/books', local:true do |f| %>
+  <p>Tilte</p>
+  <%= f.text_field :title %>
+  <p>Opinion</p>
+  <%= f.text_area :body %>
+  <p><%= f.submit 'Create Book' %></p>
+
+<% end %>

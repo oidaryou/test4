@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <%= link_to root_path do%>
+           <span class="navbar-brand">Bookers</span>
+           <% end %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+           <% if user_signed_in? %>
+           <%= link_to user_path(current_user) do%>
+            <span class="fas fa-home">Home</span>
+           <% end %>
+           <%= link_to users_path do%>
+            <span class="fas fa-users">Users</span>
+           <% end %>
+           <%= link_to books_path do%>
+            <span class="fas fa-book-open">Books</span>
+           <% end %>
+           <%= link_to destroy_user_session_path, method: :delete do%>
+            <span class="fas fa-sign-out-alt">Logout</span>
+           <% end %>
+          <% else %>
+           <%= link_to root_path do%>
+            <span class="fas fa-home">Home</span>
+           <% end %>
+           <%= link_to home_about_path do%>
+            <span class="fas fa-link">About</span>
+           <% end %>
+           <%= link_to new_user_registration_path do%>
+            <span class="fas fa-user-plus">sign up</span>
+           <% end %>
+           <%= link_to new_user_session_path do%>
+            <span class="fas fa-sign-in-alt">login</span>
+           <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+      <main>
+          <% flash.each do |key, value| %>
+    <%= content_tag(:div, value, class: "#{key}") %>
+  <% end %>
+        <%= yield %>
+      </main>
+    <footer>
+  <div class="container mt-5">
+  	<div class="row">
+    	<div class="mx-auto">
+    		<p>CopyRight Infratop.inc</p>
+    	</div>
+    </div>
+  </div>
+</footer>
+
+</body>
