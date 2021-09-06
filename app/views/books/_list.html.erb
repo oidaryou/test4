@@ -12,19 +12,69 @@
 
 
  <tbody>
+   <% if @user == current_user %>
  <tr>
-   <th>name</th>
-   <th><%= user.name %></th>
+      <th>name</th>
+      <th><%= user.name %></th>
+    </tr>
+    <tr>
+      <th>introduction</th>
+    </tr>
+    <tr>
+      <th>フォロー数: </th>
+      <th><%= link_to user_followings_path(user.id) do%>
+          <%= user.followings.count %></th>
+          <% end %>
+    </tr>
+    <tr>
+      <th>フォロワー数: </th>
+      <th>
+        <%= link_to user_followers_path(user.id) do%>
+          <%= user.followers.count %></th>
+          <% end %>
+    </tr>
+      <th><%= user.introduction %></th>
+    </tr>
+      <th>
+      <%= link_to  edit_user_path(user) do%>
+       <i class="fas fa-user-cog"></i>
+   </th>
+   <% end %>
+   <% else %>
    <tr>
-   <th>introduction</th>
-   <th><%= user.introduction %></th>
-   </tr>
-   <th>
-    <%= link_to  edit_user_path(user) do%>
-    <i class="fas fa-user-cog"></i>
-    <% end %>
-    </th>
-
+      <th>name</th>
+      <th><%= user.name %></th>
+    </tr>
+    <tr>
+      <th>introduction</th>
+    </tr>
+    <tr>
+      <th>フォロー数: </th>
+      <th><%= link_to user_followings_path(user.id) do%>
+          <%= user.followings.count %></th>
+          <% end %>
+    </tr>
+    <tr>
+      <th>フォロワー数: </th>
+      <th>
+        <%= link_to user_followers_path(user.id) do%>
+          <%= user.followers.count %></th>
+          <% end %>
+    </tr>
+      <th><%= user.introduction %></th>
+    </tr>
+    <tr>
+      <th>
+      <%= link_to  edit_user_path(user) do%>
+       <i class="fas fa-user-cog"></i>
+       </th></tr>
+       <tr>
+       <th>
+       <td><%= render 'relationships/follow_button', user: user %></td>
+       </th>
+       </tr>
+      <% end %>
+      <% end %>
     </tbody>
  </tr>
 </table>

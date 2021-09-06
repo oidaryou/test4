@@ -10,6 +10,7 @@ class BooksController < ApplicationController
     @user = @book.user
     @books = @user.books.page(params[:page]).reverse_order
     @new_book = Book.new
+    @book_comment = BookComment.new
   end
 
   def edit
